@@ -5,7 +5,7 @@ import { createNote } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import css from "./NoteForm.module.css";
 import { NewNoteData, Tag } from "@/types/note";
-import { useNoteDraftStore } from "@/lib/store";
+import { useNoteDraftStore } from "@/lib/store/store";
 
 export default function NoteForm() {
   const router = useRouter();
