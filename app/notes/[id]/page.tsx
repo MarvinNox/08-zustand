@@ -9,6 +9,7 @@ import NoteDetailsClient from "./NoteDetails.client";
 type Props = {
   params: Promise<{ id: string }>;
 };
+
 export async function generateMetadata({ params }: Props) {
   const { id } = await params;
   const note = await fetchNoteById(+id);
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props) {
       card: "summary_large_image",
       title: `${note.title}`,
       description: note.content.slice(0, 30),
-      image: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
+      images: ["https://ac.goit.global/fullstack/react/notehub-og-meta.jpg"],
     },
   };
 }
