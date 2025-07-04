@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import css from "./NoteForm.module.css";
@@ -9,6 +9,7 @@ import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 export default function NoteForm() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const onClose = () => router.back();
 
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
@@ -16,6 +17,7 @@ export default function NoteForm() {
   const { mutate, isPending } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
       clearDraft();
       onClose();
     },

@@ -22,7 +22,6 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
   const [query, setQuery] = useState("");
   const [debouncedQuery] = useDebounce(query, 400);
 
-
   useEffect(() => {
     setPage(1);
   }, [debouncedQuery, tag]);
@@ -31,7 +30,6 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
     queryKey: ["notes", tag, debouncedQuery, page],
     queryFn: () => fetchNotes({ page: page, search: debouncedQuery, tag: tag }),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
     initialData,
   });
 
